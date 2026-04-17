@@ -1,0 +1,129 @@
+/* модальное окно — только необходимые стили, без перебивания основной темы */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s ease;
+    padding: 1rem;
+    box-sizing: border-box;
+}
+.modal-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+.modal-container {
+    background: var(--card-bg, #ffffff);
+    border-radius: 28px;
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0,0,0,0.05);
+    font-family: 'Inter', sans-serif;
+    transition: transform 0.2s ease, background 0.2s ease;
+    transform: scale(0.96);
+    border: 1px solid var(--border, #e2e8f0);
+}
+.modal-overlay.active .modal-container {
+    transform: scale(1);
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 1.5rem 0.6rem 1.5rem;
+    border-bottom: 1px solid var(--border-light, #eef2f6);
+}
+.modal-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent, #1f6e7a), var(--accent-dark, #0e4e58));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: -0.3px;
+}
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text-muted, #5b6e8c);
+    transition: color 0.2s, background 0.2s;
+    line-height: 1;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 40px;
+}
+.modal-close:hover {
+    color: var(--accent, #1f6e7a);
+    background: var(--hover-bg, #f1f5f9);
+}
+.modal-body {
+    padding: 1.5rem;
+    color: var(--text-primary, #1e293b);
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 400;
+    transition: color 0.2s ease;
+}
+.modal-body p {
+    margin: 0 0 0.75rem 0;
+    color: var(--text-primary, #1e293b);
+}
+.modal-body p:last-child {
+    margin-bottom: 0;
+}
+/* для тёмной темы — подхват переменных из основного css */
+body.dark .modal-container {
+    background: var(--card-bg, #1e293b);
+    border-color: var(--border, #334155);
+}
+body.dark .modal-header {
+    border-bottom-color: var(--border-light, #2d3a4f);
+}
+body.dark .modal-close:hover {
+    background: var(--hover-bg, #2d3a4f);
+}
+body.dark .modal-body {
+    color: var(--text-primary, #e2e8f0);
+}
+body.dark .modal-body p {
+    color: var(--text-primary, #e2e8f0);
+}
+/* адаптация для маленьких экранов */
+@media (max-width: 560px) {
+    .modal-container {
+        max-width: 92%;
+        border-radius: 24px;
+    }
+    .modal-header h3 {
+        font-size: 1.3rem;
+    }
+    .modal-body {
+        padding: 1.2rem;
+        font-size: 0.95rem;
+    }
+}
+/* небольшая анимация для кнопок без изменения основной вёрстки */
+.role-badge {
+    cursor: pointer;
+    transition: transform 0.1s ease, background 0.2s;
+}
+.role-badge:active {
+    transform: scale(0.97);
+}
